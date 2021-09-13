@@ -18,7 +18,7 @@ export default class Node extends Component {
         } = this.props;
 
         const extraClassName = isEnd
-            ? 'node-finish' :
+            ? 'node-end' :
             isStart
                 ? 'node-start' :
                 isBarrier
@@ -27,8 +27,8 @@ export default class Node extends Component {
 
         return (
             <div
-                id={'node-${row}-${col}'}
-                className={'node ${extraClassName}'}
+                id={`node-${row}-${col}`}
+                className={`node ${extraClassName}`}
                 onMouseDown={undefined}
                 onMouseEnter={undefined}
                 onMouseUp={undefined}></div>

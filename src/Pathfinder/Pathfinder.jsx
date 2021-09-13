@@ -66,7 +66,7 @@ const createNode = (col, row) => {
         col,
         row,
         isStart: row === START_NODE_ROW && col === START_NODE_COL,
-        isFinish: row === END_NODE_ROW && col === END_NODE_COL,
+        isEnd: row === END_NODE_ROW && col === END_NODE_COL,
         distance: Infinity,
         isVisited: false,
         isBarrier: false,
