@@ -4,10 +4,10 @@ import Node from './Node/Node.jsx';
 import './Pathfinder.css';
 
 const START_NODE_COL = 10;
-const START_NODE_ROW = 11;
+const START_NODE_ROW = 10;
 
 const END_NODE_COL = 40;
-const END_NODE_ROW = 11;
+const END_NODE_ROW = 10;
 
 const GRID_COLS = 50;
 const GRID_ROWS = 21;
@@ -24,6 +24,11 @@ export default class Pathfinder extends Component {
     componentDidMount() {
         const grid = getInitialGrid();
         this.setState({ grid });
+    }
+
+    handleMouseDown(row, col) {
+        const newGrid = getGridWithNewNode(this.state.grid, row, col);
+        this.setState({ grid: newGrid, mouseIsPressed: false });
     }
 
     render() {
@@ -45,7 +50,7 @@ export default class Pathfinder extends Component {
                                             isStart={isStart}
                                             isBarrier={isBarrier}
                                             mouseIsPressed={mouseIsPressed}
-                                            onMouseDown={undefined}
+                                            onMouseDown={(row, col) => this.handleMouseDown(row, col)}
                                             onMouseEnter={undefined}
                                             onMouseUp={undefined}
                                             row={row}></Node>
@@ -65,8 +70,8 @@ const createNode = (col, row) => {
     return {
         col,
         row,
-        isStart: row === START_NODE_ROW && col === START_NODE_COL,
-        isEnd: row === END_NODE_ROW && col === END_NODE_COL,
+        isStart: false,
+        isEnd: false,
         distance: Infinity,
         isVisited: false,
         isBarrier: false,
@@ -85,3 +90,15 @@ const getInitialGrid = () => {
     }
     return grid;
 };
+
+const getGridWithNewNode = (grid, row, col) => {
+    if (row === Pathfinder.startNodeRow && col === Pathfinder.startNodeCol) return;
+    const newGrid = getInitialGrid();
+    const node = newGrid[row][col];
+    const newNode = {
+        ...node,
+        isStart: !node.isStart
+    };
+    newGrid[row][col] = newNode;
+    return newGrid;
+}
