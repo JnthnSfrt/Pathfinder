@@ -18,7 +18,11 @@ export default class Pathfinder extends Component {
         this.state = {
             grid: [],
             mouseIsPressed: false,
+            stateName: 'idle',
         };
+        this.setStartNode = this.setStartNode.bind(this);
+        this.setEndNode = this.setEndNode.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -27,15 +31,46 @@ export default class Pathfinder extends Component {
     }
 
     handleMouseDown(row, col) {
-        const newGrid = getGridWithNewNode(this.state.grid, row, col);
-        this.setState({ grid: newGrid, mouseIsPressed: false });
+        if (this.state.stateName === 'idle') return;
+        const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
+        this.setState({ grid: newGrid, mouseIsPressed: true });
+    }
+
+    handleMouseUp(row, col) {
+        if (this.state.mouseIsPressed) {
+            this.setState({ mouseIsPressed: false, stateName: 'idle' });
+        }
+    }
+
+    setStartNode() {
+        if (this.stateName !== 'start') {
+            this.setState({ stateName: 'start' });
+        }
+    }
+
+    setEndNode() {
+        if (this.state.stateName !== 'end') {
+            this.setState({ stateName: 'end' });
+        }
+    }
+
+    reset() {
+        const grid = getInitialGrid();
+        this.setState({ grid });
     }
 
     render() {
         const { grid, mouseIsPressed } = this.state;
-
         return (
             <>
+                <div>StateName: {this.state.stateName}</div>
+                <button onClick={this.setStartNode}>
+                    Set start node
+                </button>
+                <button onClick={this.setEndNode}>
+                    Set end node
+                </button>
+                <button onClick={this.reset}>Reset</button>
                 <div className="grid">
                     {grid.map((row, rowIdx) => {
                         return (
@@ -52,7 +87,7 @@ export default class Pathfinder extends Component {
                                             mouseIsPressed={mouseIsPressed}
                                             onMouseDown={(row, col) => this.handleMouseDown(row, col)}
                                             onMouseEnter={undefined}
-                                            onMouseUp={undefined}
+                                            onMouseUp={(row, col) => this.handleMouseUp(row, col)}
                                             row={row}></Node>
                                     );
                                 })}
@@ -91,14 +126,25 @@ const getInitialGrid = () => {
     return grid;
 };
 
-const getGridWithNewNode = (grid, row, col) => {
-    if (row === Pathfinder.startNodeRow && col === Pathfinder.startNodeCol) return;
+const getGridWithNewNode = (grid, row, col, state) => {
     const newGrid = getInitialGrid();
     const node = newGrid[row][col];
-    const newNode = {
+    var newNode = {
         ...node,
-        isStart: !node.isStart
     };
-    newGrid[row][col] = newNode;
-    return newGrid;
+    if (state === 'start') {
+        newNode = {
+            ...node,
+            isStart: true
+        };
+    }
+    else if (state === 'end') {
+        newNode = {
+            ...node,
+            isEnd: true
+        };
+    }
+
+    grid[row][col] = newNode;
+    return grid;
 }
