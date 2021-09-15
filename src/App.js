@@ -5,7 +5,7 @@ function App() {
   return (
     <div className="Pathfinder">
       <header className="App-header">
-        Pathfinder v0.1.1
+        Pathfinder v0.1.2
       </header>
       <Pathfinder></Pathfinder>
     </div>
