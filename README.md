@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-https://codesandbox.io/s/adoring-bas-574zj
+[Codesandbox Demo](https://codesandbox.io/s/github/JnthnSfrt/Pathfinder)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
