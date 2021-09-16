@@ -7,3 +7,5 @@ v0.1.1  Added start node and end node to grid.
 v0.1.2  Set start node via mouse click in the grid.
 
 v0.1.3  Set start and end node via mouse click in the grid. Reset button added.
+
+v0.1.4  Rename barrier to wall. Draw wall via drag&drop.

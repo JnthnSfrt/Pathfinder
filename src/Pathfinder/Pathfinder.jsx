@@ -3,12 +3,6 @@ import Node from './Node/Node.jsx';
 
 import './Pathfinder.css';
 
-const START_NODE_COL = 10;
-const START_NODE_ROW = 10;
-
-const END_NODE_COL = 40;
-const END_NODE_ROW = 10;
-
 const GRID_COLS = 50;
 const GRID_ROWS = 21;
 
@@ -22,6 +16,7 @@ export default class Pathfinder extends Component {
         };
         this.setStartNode = this.setStartNode.bind(this);
         this.setEndNode = this.setEndNode.bind(this);
+        this.setWallNode = this.setWallNode.bind(this);
         this.reset = this.reset.bind(this);
     }
 
@@ -34,6 +29,16 @@ export default class Pathfinder extends Component {
         if (this.state.stateName === 'idle') return;
         const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
         this.setState({ grid: newGrid, mouseIsPressed: true });
+        if (this.state.stateName === 'wall') {
+            this.setState({ stateName: 'draw-wall' })
+        }
+    }
+
+    handleMouseEnter(row, col) {
+        if (this.state.stateName === 'draw-wall') {
+            const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
+            this.setState({ grid: newGrid, mouseIsPressed: true });
+        }
     }
 
     handleMouseUp(row, col) {
@@ -54,6 +59,12 @@ export default class Pathfinder extends Component {
         }
     }
 
+    setWallNode() {
+        if (this.state.stateName !== 'wall') {
+            this.setState({ stateName: 'wall' });
+        }
+    }
+
     reset() {
         const grid = getInitialGrid();
         this.setState({ grid });
@@ -64,29 +75,39 @@ export default class Pathfinder extends Component {
         return (
             <>
                 <div>StateName: {this.state.stateName}</div>
+
                 <button onClick={this.setStartNode}>
                     Set start node
                 </button>
+
                 <button onClick={this.setEndNode}>
                     Set end node
                 </button>
-                <button onClick={this.reset}>Reset</button>
+
+                <button onClick={this.setWallNode}>
+                    Draw wall
+                </button>
+
+                <button onClick={this.reset}>
+                    Reset
+                </button>
+
                 <div className="grid">
                     {grid.map((row, rowIdx) => {
                         return (
                             <div key={rowIdx}>
                                 {row.map((node, nodeIdx) => {
-                                    const { row, col, isEnd, isStart, isBarrier } = node;
+                                    const { row, col, isEnd, isStart, isWall } = node;
                                     return (
                                         <Node
                                             key={nodeIdx}
                                             col={col}
                                             isEnd={isEnd}
                                             isStart={isStart}
-                                            isBarrier={isBarrier}
+                                            isWall={isWall}
                                             mouseIsPressed={mouseIsPressed}
                                             onMouseDown={(row, col) => this.handleMouseDown(row, col)}
-                                            onMouseEnter={undefined}
+                                            onMouseEnter={(row, col) => this.handleMouseEnter(row, col)}
                                             onMouseUp={(row, col) => this.handleMouseUp(row, col)}
                                             row={row}></Node>
                                     );
@@ -109,7 +130,7 @@ const createNode = (col, row) => {
         isEnd: false,
         distance: Infinity,
         isVisited: false,
-        isBarrier: false,
+        isWall: false,
         previousNode: null,
     };
 };
@@ -143,6 +164,12 @@ const getGridWithNewNode = (grid, row, col, state) => {
             ...node,
             isEnd: true
         };
+    }
+    else {
+        newNode = {
+            ...node,
+            isWall: true
+        }
     }
 
     grid[row][col] = newNode;

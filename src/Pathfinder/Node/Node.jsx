@@ -11,7 +11,7 @@ export default class Node extends Component {
             isStart,
             isEnd,
             isVisited,
-            isBarrier,
+            isWall,
             onMouseDown,
             onMouseEnter,
             onMouseUp,
@@ -21,8 +21,8 @@ export default class Node extends Component {
             ? 'node-end' :
             isStart
                 ? 'node-start' :
-                isBarrier
-                    ? 'node-barrier' :
+                isWall
+                    ? 'node-wall' :
                     '';
 
         return (
@@ -30,7 +30,7 @@ export default class Node extends Component {
                 id={`node-${row}-${col}`}
                 className={`node ${extraClassName}`}
                 onMouseDown={() => onMouseDown(row, col)}
-                onMouseEnter={undefined}
+                onMouseEnter={() => onMouseEnter(row, col)}
                 onMouseUp={() => onMouseUp(row, col)}></div >
         );
     }
