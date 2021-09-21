@@ -12,6 +12,7 @@ export default class Pathfinder extends Component {
         this.state = {
             grid: [],
             mouseIsPressed: false,
+            // Control the mouse behaviour 
             stateName: 'idle',
         };
     }
@@ -25,6 +26,8 @@ export default class Pathfinder extends Component {
         if (this.state.stateName === 'idle') return;
         const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
         this.setState({ grid: newGrid, mouseIsPressed: true });
+        // Walls need an additional state because after pressing the button to set walls hovering over the grid would
+        // start drawing walls. With the additional state walls are getting placed after a mouse click into a node.
         if (this.state.stateName === 'wall') {
             this.setState({ stateName: 'draw-wall' })
         }
@@ -43,24 +46,28 @@ export default class Pathfinder extends Component {
         }
     }
 
+    // Switch state to enable placing start node(s) with mouse click
     setStartNode() {
         if (this.stateName !== 'start') {
             this.setState({ stateName: 'start' });
         }
     }
 
+    // Switch state to enable placing end node(s) with mouse click
     setEndNode() {
         if (this.state.stateName !== 'end') {
             this.setState({ stateName: 'end' });
         }
     }
 
+    // Switch state to enable placing wall node(s) with mouse click
     setWallNode() {
         if (this.state.stateName !== 'wall') {
             this.setState({ stateName: 'wall' });
         }
     }
 
+    // Removes all start, end and wall nodes
     reset() {
         const grid = getInitialGrid();
         this.setState({ grid });
