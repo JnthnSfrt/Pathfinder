@@ -7,7 +7,7 @@ function App() {
       <header className="App-header">
         Pathfinder v0.1.4
       </header>
-      <Pathfinder></Pathfinder>
+      <Pathfinder />
     </div>
   );
 }
