@@ -14,10 +14,6 @@ export default class Pathfinder extends Component {
             mouseIsPressed: false,
             stateName: 'idle',
         };
-        this.setStartNode = this.setStartNode.bind(this);
-        this.setEndNode = this.setEndNode.bind(this);
-        this.setWallNode = this.setWallNode.bind(this);
-        this.reset = this.reset.bind(this);
     }
 
     componentDidMount() {
@@ -76,19 +72,19 @@ export default class Pathfinder extends Component {
             <>
                 <div>StateName: {this.state.stateName}</div>
 
-                <button onClick={this.setStartNode}>
+                <button onClick={() => this.setStartNode()}>
                     Set start node
                 </button>
 
-                <button onClick={this.setEndNode}>
+                <button onClick={() => this.setEndNode()}>
                     Set end node
                 </button>
 
-                <button onClick={this.setWallNode}>
+                <button onClick={() => this.setWallNode()}>
                     Draw wall
                 </button>
 
-                <button onClick={this.reset}>
+                <button onClick={() => this.reset()}>
                     Reset
                 </button>
 
