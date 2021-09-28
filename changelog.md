@@ -11,3 +11,5 @@ v0.1.3  Set start and end node via mouse click in the grid. Reset button added.
 v0.1.4  Rename barrier to wall. Draw wall via drag&drop.
 
 v0.2    Added Dijkstra's with animations
+
+v0.3    Added CSS

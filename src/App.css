@@ -1,4 +1,10 @@
-.Pathfinder {
+* {
   text-align: center;
-  /* background-color:rgba(206, 206, 206, 0.335); */
+  background-color: rgb(243, 251, 255);
+}
+
+.App-header {
+  font-size: 32px;
+  color: rgb(243, 251, 255);
+  background-color: rgb(0, 100, 140);
 }

@@ -3,9 +3,9 @@ import Pathfinder from './Pathfinder/Pathfinder';
 
 function App() {
   return (
-    <div className="Pathfinder">
+    <div className="App">
       <header className="App-header">
-        Pathfinder v0.2
+        Pathfinder v0.3
       </header>
       <Pathfinder />
     </div>

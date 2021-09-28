@@ -4,15 +4,8 @@ import { dijkstra, getNodesInShortestPathOrder } from '../algorithms/Dijkstra.js
 import Node from './Node/Node.jsx';
 import './Pathfinder.css';
 
-const GRID_COLS = 50;
-const GRID_ROWS = 21;
-
-const initialState = {
-  grid: [],
-  startNodes: [],
-  mouseIsPressed: false,
-  stateName: 'idle'
-}
+const GRID_COLS = 70;
+const GRID_ROWS = 27;
 
 export default class Pathfinder extends Component {
   constructor() {
@@ -150,14 +143,14 @@ export default class Pathfinder extends Component {
     const { grid, mouseIsPressed } = this.state;
     return (
       <>
-        <div>StateName: {this.state.stateName}</div>
-
-        <button onClick={() => this.setStartNode()}>Set start node</button>
-        <button onClick={() => this.setEndNode()}>Set end node</button>
-        <button onClick={() => this.setWallNode()}>Draw wall</button>
-        <button onClick={() => this.reset()}>Reset</button>
-        <button onClick={() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
-
+        <div className="toolbar">
+          <div className="toolbar">StateName: {this.state.stateName}</div>
+          <button className="button" onClick={() => this.setStartNode()}>Set start node</button>
+          <button className="button" onClick={() => this.setEndNode()}>Set end node</button>
+          <button className="button" onClick={() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
+          <button className="button" onClick={() => this.setWallNode()}>Draw wall</button>
+          <button className="button" onClick={() => this.reset()}>Reset</button>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
