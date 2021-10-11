@@ -13,3 +13,5 @@ v0.1.4  Rename barrier to wall. Draw wall via drag&drop.
 v0.2    Added Dijkstra's with animations
 
 v0.3    Added CSS
+
+v0.3.1 Node margin optimized

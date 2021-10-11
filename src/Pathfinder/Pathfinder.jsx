@@ -4,8 +4,8 @@ import { dijkstra, getNodesInShortestPathOrder } from '../algorithms/Dijkstra.js
 import Node from './Node/Node.jsx';
 import './Pathfinder.css';
 
-const GRID_COLS = 70;
-const GRID_ROWS = 27;
+const GRID_COLS = 66;
+const GRID_ROWS = 29;
 
 export default class Pathfinder extends Component {
   constructor() {
@@ -194,12 +194,19 @@ const createNode = (col, row) => {
   };
 };
 
-const getInitialGrid = () => {
+const getInitialGrid = (modifier) => {
   const grid = [];
   for (let row = 0; row < GRID_ROWS; row++) {
     const currentRow = [];
     for (let col = 0; col < GRID_COLS; col++) {
-      currentRow.push(createNode(col, row));
+      var node = createNode(col, row);
+      if (modifier === 'walls') {
+        node = {
+          ...node,
+          isWall: true
+        }
+      }
+      currentRow.push(node);
     }
     grid.push(currentRow);
   }
