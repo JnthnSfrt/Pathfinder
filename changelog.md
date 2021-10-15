@@ -14,4 +14,6 @@ v0.2    Added Dijkstra's with animations
 
 v0.3    Added CSS
 
-v0.3.1 Node margin optimized
+v0.3.1  Node margin optimized
+
+v0.4    Added Prims's with animation

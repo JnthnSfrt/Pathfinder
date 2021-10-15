@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 
-import { dijkstra, getNodesInShortestPathOrder } from '../algorithms/Dijkstra.js';
+import { dijkstra, getNodesInShortestPathOrder }
+  from '../algorithms/Dijkstra.js';
+import { primMaze } from './Maze/Prim.js';
 import Node from './Node/Node.jsx';
 import './Pathfinder.css';
 
@@ -28,10 +30,12 @@ export default class Pathfinder extends Component {
 
   handleMouseDown(row, col) {
     if (this.state.stateName === 'idle') return;
-    const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
+    const newGrid =
+      getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
     this.setState({ grid: newGrid, mouseIsPressed: true });
-    // After pressing the button to set walls hovering over the grid would start drawing walls. 
-    // With an additional state walls are getting placed after a mouse click into a node.
+    // After pressing the button to set walls hovering over the grid 
+    // would start drawing walls. With an additional state walls are 
+    // getting placed after a mouse click into a node.  
     if (this.state.stateName === 'wall') {
       this.setState({ stateName: 'draw-wall' })
     }
@@ -39,7 +43,8 @@ export default class Pathfinder extends Component {
 
   handleMouseEnter(row, col) {
     if (this.state.stateName === 'draw-wall') {
-      const newGrid = getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
+      const newGrid =
+        getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
       this.setState({ grid: newGrid, mouseIsPressed: true });
     }
   }
@@ -139,17 +144,46 @@ export default class Pathfinder extends Component {
     this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder)
   }
 
+  visualizeMaze() {
+    const maze = primMaze(this.state.grid);
+    this.animateMaze(maze);
+  }
+
+  animateMaze(maze) {
+    for (let row = 0; row < maze.length; row++) {
+      for (let col = 0; col < maze[0].length; col++) {
+        setTimeout(() => {
+          setTimeout(() => {
+            const node = maze[row][col];
+            if (node.isWall === true) {
+              document.getElementById(`node-${node.row}-${node.col}`).className =
+                'node node-wall';
+            }
+          }, 20 * col);
+        }, 130 * row);
+      }
+    }
+    setTimeout(() => this.setState({ grid: maze }), 5000);
+  }
+
   render() {
     const { grid, mouseIsPressed } = this.state;
     return (
       <>
         <div className="toolbar">
           <div className="toolbar">StateName: {this.state.stateName}</div>
-          <button className="button" onClick={() => this.setStartNode()}>Set start node</button>
-          <button className="button" onClick={() => this.setEndNode()}>Set end node</button>
-          <button className="button" onClick={() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
-          <button className="button" onClick={() => this.setWallNode()}>Draw wall</button>
-          <button className="button" onClick={() => this.reset()}>Reset</button>
+          <button className="button" onClick=
+            {() => this.setStartNode()}>Set start node</button>
+          <button className="button" onClick=
+            {() => this.setEndNode()}>Set end node</button>
+          <button className="button" onClick=
+            {() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
+          <button className="button" onClick=
+            {() => this.setWallNode()}>Draw wall</button>
+          <button className="button" onClick=
+            {() => this.visualizeMaze()}>Visualize Maze</button>
+          <button className="button" onClick=
+            {() => this.reset()}>Reset</button>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -165,9 +199,12 @@ export default class Pathfinder extends Component {
                       isStart={isStart}
                       isWall={isWall}
                       mouseIsPressed={mouseIsPressed}
-                      onMouseDown={(row, col) => this.handleMouseDown(row, col)}
-                      onMouseEnter={(row, col) => this.handleMouseEnter(row, col)}
-                      onMouseUp={(row, col) => this.handleMouseUp(row, col)}
+                      onMouseDown={(row, col) =>
+                        this.handleMouseDown(row, col)}
+                      onMouseEnter={(row, col) =>
+                        this.handleMouseEnter(row, col)}
+                      onMouseUp={(row, col) =>
+                        this.handleMouseUp(row, col)}
                       row={row} />
                   );
                 })}
@@ -183,8 +220,8 @@ export default class Pathfinder extends Component {
 
 const createNode = (col, row) => {
   return {
-    col,
-    row,
+    col: col,
+    row: row,
     isStart: false,
     isEnd: false,
     distance: Infinity,
@@ -194,19 +231,12 @@ const createNode = (col, row) => {
   };
 };
 
-const getInitialGrid = (modifier) => {
+const getInitialGrid = () => {
   const grid = [];
   for (let row = 0; row < GRID_ROWS; row++) {
     const currentRow = [];
     for (let col = 0; col < GRID_COLS; col++) {
-      var node = createNode(col, row);
-      if (modifier === 'walls') {
-        node = {
-          ...node,
-          isWall: true
-        }
-      }
-      currentRow.push(node);
+      currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);
   }
