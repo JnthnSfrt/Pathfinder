@@ -8,9 +8,6 @@
 //    2: Nachbarzellen isWall -> Liste 
 //  3: entferne Liste[random] von Liste 
 
-const GRID_ROWS = 29;
-const GRID_COLS = 66;
-
 export function primMaze(initialGrid) {
   const walls = [];
   const grid = prepareGrid(initialGrid);
@@ -29,7 +26,7 @@ export function primMaze(initialGrid) {
 
   while (walls.length > 0) {
     var randomWall = walls[Math.floor(Math.random() * walls.length)];
-    if (getAdjacents(randomWall, grid).length - 1 ==
+    if (getAdjacents(randomWall, grid).length - 1 ===
       getAdjacentWalls(randomWall, grid).length) {
       // Make wall a passage
       randomWall.isWall = false;
@@ -76,7 +73,7 @@ function getAdjacentWalls(node, grid) {
   const adjacents = getAdjacents(node, grid);
   var adjacentWalls = [];
   for (var i = 0; i < adjacents.length; i++) {
-    if (adjacents[i].isWall == true) {
+    if (adjacents[i].isWall === true) {
       adjacentWalls.push(adjacents[i]);
     }
   }
