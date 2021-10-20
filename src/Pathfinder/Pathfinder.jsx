@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 
 import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
-import { primMaze } from './Maze/Prim.js';
+import { primMaze } from '../algorithms/Maze/Prim.js';
 import Node from './Node/Node.jsx';
 import './Pathfinder.css';
 
-const GRID_COLS = 66;
-const GRID_ROWS = 29;
+const FULLSCREEN_GRID_COLS = 66;
+const FULLSCREEN_GRID_ROWS = 29;
+const MULTIPLIER = 1.25;
 
 export default class Pathfinder extends Component {
   constructor() {
@@ -84,6 +85,8 @@ export default class Pathfinder extends Component {
     //  this.setState({ grid });
   }
 
+
+
   getStartNodes(grid) {
     const startNodes = [];
     for (const row of grid) {
@@ -103,6 +106,7 @@ export default class Pathfinder extends Component {
     }
     return endNodes;
   }
+
 
   animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
@@ -150,8 +154,8 @@ export default class Pathfinder extends Component {
   }
 
   animateMaze(maze) {
-    for (let row = 0; row < maze.length; row++) {
-      for (let col = 0; col < maze[0].length; col++) {
+    for (let col = 0; col < maze[0].length; col++) {
+      for (let row = 0; row < maze.length; row++) {
         setTimeout(() => {
           setTimeout(() => {
             const node = maze[row][col];
@@ -159,11 +163,11 @@ export default class Pathfinder extends Component {
               document.getElementById(`node-${node.row}-${node.col}`).className =
                 'node node-wall';
             }
-          }, 20 * col);
-        }, 130 * row);
+          }, MULTIPLIER * 5 * col);
+        }, MULTIPLIER * 305 * row);
       }
     }
-    setTimeout(() => this.setState({ grid: maze }), 5000);
+    setTimeout(() => this.setState({ grid: maze }), MULTIPLIER * 10000);
   }
 
   render() {
@@ -232,10 +236,14 @@ const createNode = (col, row) => {
 };
 
 const getInitialGrid = () => {
+  const factorHeight = (window.innerHeight / 977);
+  const factorWidth = (window.innerWidth / 1845);
+  const rows = Math.floor(factorHeight * FULLSCREEN_GRID_ROWS);
+  const cols = Math.floor(factorWidth * FULLSCREEN_GRID_COLS);
   const grid = [];
-  for (let row = 0; row < GRID_ROWS; row++) {
+  for (let row = 0; row < rows; row++) {
     const currentRow = [];
-    for (let col = 0; col < GRID_COLS; col++) {
+    for (let col = 0; col < cols; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);

@@ -17,3 +17,5 @@ v0.3    Added CSS
 v0.3.1  Node margin optimized
 
 v0.4    Added Prims's with animation
+
+v0.5    Change grid size based on window size
