@@ -11,14 +11,3 @@
   --main-visited75: rgba(0, 183, 255, 0.775);
   --main-visited100: rgba(175, 228, 255, 0.75);
 }
-
-* {
-  text-align: center;
-  background-color: var(--main-bright);
-}
-
-.App-header {
-  font-size: 32px;
-  color: var(--main-bright);
-  background-color: var(--main-dark);
-}

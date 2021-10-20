@@ -1,9 +1,11 @@
+@import url(../App.css);
+
 .grid {
   margin: 35px 0 0;
 }
 
 .toolbar {
-  background-color: rgb(0, 100, 140);
+  background-color: var(--main-dark);
 }
 
 .button {
@@ -15,7 +17,7 @@
   border: none;
   background: none;
   font-size: 20px;
-  color:rgb(243, 251, 255);
+  color:var(--main-bright);
   outline: 0;
   overflow:hidden;
   background: none;
@@ -29,15 +31,15 @@
 }
 
 .button:hover{
-  background-color: rgb(243, 251, 255);
-  color: rgb(0, 100, 140);
-  border-color: rgb(0, 100, 140);
+  background-color: var(--main-bright);
+  color: var(--main-dark);
+  border-color: var(--main-dark);
 }
 
 .button:before {
   content: "";
   position: absolute;
-  background: rgb(243, 251, 255);
+  background: var(--main-bright);
   bottom: 0;
   left: 0;
   right: 0;
