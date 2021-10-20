@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import './Node.css';
+import '../../Styles/Node.css';
 
 export default class Node extends Component {
 

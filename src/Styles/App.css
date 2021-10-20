@@ -1,3 +1,4 @@
+@import url(./colors.css);
 * {
   text-align: center;
   background-color: var(--main-bright);

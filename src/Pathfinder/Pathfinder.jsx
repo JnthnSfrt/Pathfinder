@@ -4,7 +4,8 @@ import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
 import { primMaze } from '../algorithms/Maze/Prim.js';
 import Node from './Node/Node.jsx';
-import './Pathfinder.css';
+
+import '../Styles/Pathfinder.css';
 
 const FULLSCREEN_GRID_COLS = 66;
 const FULLSCREEN_GRID_ROWS = 29;
@@ -58,7 +59,7 @@ export default class Pathfinder extends Component {
 
   // Switch state to enable placing start node(s) with mouse click
   setStartNode() {
-    if (this.stateName !== 'start') {
+    if (this.state.stateName !== 'start') {
       this.setState({ stateName: 'start' });
     }
   }

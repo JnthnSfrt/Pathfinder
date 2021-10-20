@@ -1,5 +1,4 @@
-@import url(../Colors/bright.css);
-@import url(../Colors/dark.css);
+@import url(./colors.css);
 
 .grid {
   margin: 35px 0 0;
