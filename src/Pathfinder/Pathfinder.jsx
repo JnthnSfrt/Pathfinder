@@ -176,7 +176,6 @@ export default class Pathfinder extends Component {
     return (
       <>
         <div className="toolbar">
-          <div className="toolbar">StateName: {this.state.stateName}</div>
           <button className="button" onClick=
             {() => this.setStartNode()}>Set start node</button>
           <button className="button" onClick=
