@@ -3,9 +3,37 @@
   text-align: center;
   background-color: var(--main-bright);
 }
+.App{
+  height: 100%;
+  min-height: 100%;
+}
 
 .App-header {
   font-size: 32px;
   color: var(--main-bright);
   background-color: var(--main-dark);
+  height: 45px;
 }
+
+#container{width:100%;}
+
+#right{
+  margin: 10px auto;
+  float: right;
+  width: 25%;
+  background-color: var(--main-dark);
+}
+#left{
+  margin: 10px auto;
+  float: left;
+  width: 25%;
+  background-color: var(--main-dark);
+}
+
+#center{
+  margin:0 auto;
+  width:50%;
+  background-color: var(--main-dark);
+}
+
+

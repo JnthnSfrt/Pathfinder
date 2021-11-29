@@ -1,4 +1,5 @@
 import './Styles/App.css';
+import './Styles/slider.css';
 import Pathfinder from './Pathfinder/Pathfinder';
 import react, { useState, useEffect } from 'react';
 
@@ -18,16 +19,20 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="App" data-theme={darkMode ? "dark" : "light"}>
+    <div className="App" data-theme={darkMode ? "light" : "dark"}>
       <header className="App-header">
-        Pathfinder v0.6
-        <button className="DarkModeToggle" onClick={toggleDarkMode}>
-          {darkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        </button>
+        Pathfinder Version 0.6.1
       </header>
       <Pathfinder />
-      <div>
-        {getCurrentScreenSize()}
+      <label class="switch">
+        <input type="checkbox" onClick={toggleDarkMode}></input>
+        <span class="slider round"></span>
+      </label>
+      <div id="footer">
+        <div>
+          {getCurrentScreenSize()}
+        </div>
+
       </div>
     </div>
   );

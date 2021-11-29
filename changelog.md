@@ -21,3 +21,5 @@ v0.4    Added Prims's with animation
 v0.5    Change grid size based on window size
 
 v0.6    Darkmode added, CSS reorganization
+
+v0.6.1  Darkmode-Slider added
