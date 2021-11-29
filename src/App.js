@@ -1,7 +1,7 @@
 import './Styles/App.css';
 import './Styles/slider.css';
-import Pathfinder from './Pathfinder/Pathfinder';
 import react, { useState, useEffect } from 'react';
+import Pathfinder from './Pathfinder/Pathfinder';
 
 function getCurrentScreenSize() {
   let width = window.innerWidth;
@@ -19,22 +19,25 @@ function App() {
   }, [darkMode]);
 
   return (
-    <div className="App" data-theme={darkMode ? "light" : "dark"}>
-      <header className="App-header">
-        Pathfinder Version 0.6.1
-      </header>
-      <Pathfinder />
-      <label class="switch">
-        <input type="checkbox" onClick={toggleDarkMode}></input>
-        <span class="slider round"></span>
-      </label>
-      <div id="footer">
-        <div>
-          {getCurrentScreenSize()}
+    <body>
+      <div className="App" data-theme={darkMode ? "light" : "dark"}>
+        <header className="App-header">
+          <div id="empty"></div>
+          <div id="title">Pathfinder Version 0.6.2</div>
+          <div id="slider">
+            <label class="switch">
+              <input type="checkbox" onClick={toggleDarkMode}></input>
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </header>
+        <div class="content">
+          <Pathfinder />
         </div>
-
+        <footer class="footer">
+        </footer>
       </div>
-    </div>
+    </body>
   );
 }
 

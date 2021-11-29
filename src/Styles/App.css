@@ -3,37 +3,57 @@
   text-align: center;
   background-color: var(--main-bright);
 }
-.App{
+
+html, body {
   height: 100%;
-  min-height: 100%;
+  min-height: 100vh;
+}
+body {
+  display: flex;
+  flex-direction: column;
 }
 
 .App-header {
+  display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
   font-size: 32px;
   color: var(--main-bright);
   background-color: var(--main-dark);
+  height: 60px;
+}
+
+#empty {
+  background-color: var(--main-dark);
+}
+
+#title {
   height: 45px;
-}
-
-#container{width:100%;}
-
-#right{
-  margin: 10px auto;
-  float: right;
-  width: 25%;
-  background-color: var(--main-dark);
-}
-#left{
-  margin: 10px auto;
-  float: left;
-  width: 25%;
+  font-size: 32px;
+  color: var(--main-bright);
   background-color: var(--main-dark);
 }
 
-#center{
-  margin:0 auto;
-  width:50%;
+#slider {
+  margin-top: 8px;
+  margin-left: 10px;
+  position: fixed;
   background-color: var(--main-dark);
 }
+
+.content {
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  width: 100%;
+  min-height: 70px;
+  background-color: var(--main-dark);
+  position: absolute;
+  bottom: 0;
+}
+
+
 
 

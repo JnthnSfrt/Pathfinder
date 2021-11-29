@@ -23,3 +23,5 @@ v0.5    Change grid size based on window size
 v0.6    Darkmode added, CSS reorganization
 
 v0.6.1  Darkmode-Slider added
+
+v0.6.2  Footer added
