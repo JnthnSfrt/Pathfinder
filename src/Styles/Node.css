@@ -4,7 +4,7 @@
     width: 25px;
     height: 25px;
     margin-top: -4px;
-    outline: 1px solid var(--main-wall);
+    outline: 0.5px solid var(--main-wall);
     display: inline-block;
   }
 

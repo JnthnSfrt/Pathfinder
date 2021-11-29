@@ -1,6 +1,7 @@
 :root {
   --main-dark: rgb(0, 100, 140);
   --main-bright: rgb(243, 251, 255);
+  --main-bright2: rgb(233, 241, 245);
   --main-wall: rgb(1, 56, 78);
   --main-start: rgb(121, 250, 139);
   --main-end: rgb(255, 188, 188);
@@ -15,6 +16,7 @@
 [data-theme="dark"] {
   --main-dark: #292929;
   --main-bright: rgb(110, 110, 110);
+  --main-bright2:rgb(129, 129, 129);
   --main-wall: rgb(32, 32, 32);
   --main-start: rgb(26, 126, 39);
   --main-end: rgb(163, 33, 33);
