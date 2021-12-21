@@ -1,0 +1,7 @@
+@import url(./colors.css;)
+
+.hyperlink:link {
+  top: 1px;
+  background-color: var(--main-dark);
+  position: auto;
+}

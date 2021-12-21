@@ -1,7 +1,8 @@
 @import url(./colors.css);
 
 .grid {
-  margin: 35px 0 0;
+  margin-top: 35px;
+  margin-bottom: 35px;
 }
 
 .toolbar {
@@ -17,7 +18,7 @@
   border: none;
   background: none;
   font-size: 20px;
-  color:var(--main-bright);
+  color:var(--main-font);
   outline: 0;
   overflow:hidden;
   background: none;
@@ -33,7 +34,7 @@
 .button:hover{
   background-color: var(--main-bright);
   color: var(--main-dark);
-  border-color: var(--main-dark);
+  border-color: var(--main-font);
 }
 
 .button:before {

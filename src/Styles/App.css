@@ -30,7 +30,7 @@ body {
 #title {
   height: 45px;
   font-size: 32px;
-  color: var(--main-bright);
+  color: var(--main-font);
   background-color: var(--main-dark);
 }
 
@@ -54,6 +54,34 @@ body {
   bottom: 0;
 }
 
+#github-link {
+  margin-top: 20px;
+  background-color: var(--main-dark);
+}
 
+a {
+  margin-top: 10px;
+  background-color: var(--main-bright);
+  color: var(--main-font);
+}
 
+a:link {
+  background-color: var(--main-dark);
+  text-decoration: none;
+}
+
+a:visited {
+  background-color: var(--main-dark);
+  text-decoration: none;
+}
+
+a:hover {
+  background-color: var(--main-dark);
+  color: white;
+  text-decoration: none;
+}
+
+a:active {
+  background-color: var(--main-dark);
+}
 

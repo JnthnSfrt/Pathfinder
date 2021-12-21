@@ -1,4 +1,5 @@
 import './Styles/App.css';
+import './Styles/hyperlinks.css'
 import './Styles/slider.css';
 import react, { useState, useEffect } from 'react';
 import Pathfinder from './Pathfinder/Pathfinder';
@@ -35,6 +36,9 @@ function App() {
           <Pathfinder />
         </div>
         <footer class="footer">
+          <div id="github-link">
+            <a href="https://github.com/JonathanSeifert/Pathfinder" target="_blank">github.com/JonathanSeifert/Pathfinder</a>
+          </div>
         </footer>
       </div>
     </body>
