@@ -1,87 +1,26 @@
-@import url(./colors.css);
+@import url(variables.css);
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
+
 * {
-  text-align: center;
-  background-color: var(--main-bright);
+  font-family: 'Lato', sans-serif;
 }
-
-html, body {
-  height: 100%;
-  min-height: 100vh;
+.App {
+  text-align: auto;
+  overflow: hidden;
 }
-body {
+.header {
   display: flex;
-  flex-direction: column;
-}
+  flex-direction: row;
+  font-weight: 520;
+  margin-top: 22px;
+  margin-bottom: 22px;
+  font-size: 26px;
+  padding-left: 30px;
 
-.App-header {
-  display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-  font-size: 32px;
-  color: var(--main-bright);
-  background-color: var(--main-dark);
-  height: 60px;
-}
-
-#empty {
-  background-color: var(--main-dark);
-}
-
-#title {
-  height: 45px;
-  font-size: 32px;
-  color: var(--main-font);
-  background-color: var(--main-dark);
-}
-
-#slider {
-  margin-top: 8px;
-  margin-left: 10px;
-  position: fixed;
-  background-color: var(--main-dark);
 }
 
 .content {
-  flex: 1 0 auto;
+  padding-left: 30px;
 }
 
-.footer {
-  flex-shrink: 0;
-  width: 100%;
-  min-height: 70px;
-  background-color: var(--main-dark);
-  position: absolute;
-  bottom: 0;
-}
-
-#github-link {
-  margin-top: 20px;
-  background-color: var(--main-dark);
-}
-
-a {
-  margin-top: 10px;
-  background-color: var(--main-bright);
-  color: var(--main-font);
-}
-
-a:link {
-  background-color: var(--main-dark);
-  text-decoration: none;
-}
-
-a:visited {
-  background-color: var(--main-dark);
-  text-decoration: none;
-}
-
-a:hover {
-  background-color: var(--main-dark);
-  color: white;
-  text-decoration: none;
-}
-
-a:active {
-  background-color: var(--main-dark);
-}
 
