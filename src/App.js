@@ -1,7 +1,7 @@
 import './Styles/App.css';
 import './Styles/hyperlinks.css'
 import './Styles/slider.css';
-import './Styles/hamburger-menu.css';
+import './Styles/Sidebar.css';
 import react, { useState, useEffect } from 'react';
 import Pathfinder from './Pathfinder/Pathfinder.jsx';
 
@@ -25,7 +25,7 @@ function App() {
       <div className="header">
         Pathfinder v0.6.2
         {/* Hamburger-Menü */}
-        <div className="hamburger-menu">
+        <div className="Sidebar">
           <input id="menu__toggle" type="checkbox" />
           <label class="menu__btn" for="menu__toggle">
             <span></span>
