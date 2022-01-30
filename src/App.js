@@ -12,13 +12,6 @@ function getCurrentScreenSize() {
 }
 
 function App() {
-  //Darkmode
-  const storedDarkMode = localStorage.getItem("DARK_MODE");
-  const [darkMode, setDarkMode] = useState(storedDarkMode);
-  const toggleDarkMode = () => setDarkMode(darkMode ? false : true);
-  useEffect(() => {
-    localStorage.setItem("DARK_MODE", darkMode);
-  }, [darkMode]);
 
   return (
     <body data-theme={darkMode ? "light" : "dark"}>
@@ -31,13 +24,6 @@ function App() {
             <span></span>
           </label>
           <ul class="menu__box">
-            {/* Darkmode-Slider */}
-            <div id="slider">
-              <label class="switch">
-                <input type="checkbox" onClick={toggleDarkMode}></input>
-                <span class="slider round"></span>
-              </label>
-            </div>
             <button class="menu__item" onClick=
               {() => this.setStartNode()}>Set start node</button>
             <button class="menu__item">ist</button>
