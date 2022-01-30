@@ -11,5 +11,20 @@ Bei diesem Projekt handelt es sich um eine React Single-Page-Applikation. In ein
 ## Algorithmen
 Zur Bestimmung des kürzesten Weges wurde [Dijkstra's Algorithmus](https://de.wikipedia.org/wiki/Dijkstra-Algorithmus) mittels JavaScript implementiert. Zur Generierung von Irrgärten wurde [Prim's Algorithmus](https://de.wikipedia.org/wiki/Algorithmus_von_Prim) in JavaScript umgesetzt.
 
-[Codesandbox Demo](https://codesandbox.io/s/github/JnthnSfrt/Pathfinder)
+## Screenshots
+
+![image info](./screenshots/empty1.png)
+
+![image info](./screenshots/empty2.png)
+
+![image info](./screenshots/empty3.png)
+
+![image info](./screenshots/maze1.png)
+
+![image info](./screenshots/maze2.png)
+
+![image info](./screenshots/maze3.png)
+
+
+
 
