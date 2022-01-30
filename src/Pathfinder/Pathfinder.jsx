@@ -217,7 +217,6 @@ export default function Pathfinder(props) {
             {() => visualizeMaze()}>Visualize Maze</button>
           <button class="menu__button" onClick=
             {() => reset()}>Reset</button>
-          <span id="dimension">{window.innerWidth} * {window.innerHeight}</span>
         </ul>
       </div>
 

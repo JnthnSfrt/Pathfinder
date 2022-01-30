@@ -13,7 +13,7 @@
   flex-direction: row;
   font-weight: 520;
   margin-top: 22px;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
   font-size: 26px;
   padding-left: 30px;
 }
@@ -21,7 +21,37 @@
 .content {
   display: table;
   margin: auto auto;
-
 }
+
+.footer {
+  text-align: center;
+  padding-top: 30px;
+  bottom: 0 !important;
+}
+
+a:link {
+  color: var(--main-font);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: var(--main-font);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--main-font);
+  background-color: transparent;
+  font-weight: 1000;
+}
+
+a:active {
+  color: var(--main-font);
+  background-color: transparent;
+  font-weight: 1500;
+}
+
 
 

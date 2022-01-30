@@ -1,5 +1,4 @@
 import './Styles/App.css';
-import './Styles/hyperlinks.css'
 import './Styles/slider.css';
 import Pathfinder from './Pathfinder/Pathfinder.jsx';
 
@@ -8,10 +7,15 @@ function App() {
   return (
     <body>
       <div className="header">
-        Pathfinder v0.6.2
+        Pathfinder
       </div>
       <div className="content">
         <Pathfinder />
+      </div>
+      <div className="footer">
+        <a className="github-link" href="https://github.com/JonathanSeifert/Pathfinder"
+          title="Quellcode zur Applikation"
+          target="_blank">github.com/JonathanSeifert/Pathfinder</a>
       </div>
     </body>
   );
