@@ -31,7 +31,7 @@ export function primMaze(initialGrid) {
       // Make wall a passage
       randomWall.isWall = false;
       // mark the unvisited cell as part of the maze
-      var wallNeighbors = getAdjacentWalls(randomWall, grid);
+      wallNeighbors = getAdjacentWalls(randomWall, grid);
       while (wallNeighbors.length) {
         walls.push(wallNeighbors.shift());
       }

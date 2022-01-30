@@ -65,6 +65,9 @@
   z-index: 1;
 }
 /* Menü-Eintrag */
+.menu__button:hover {
+  font-weight: 1000;
+}
 .menu__button {
   display: block;
   min-width: 100%;
@@ -72,14 +75,12 @@
   border: 0.5px;
   padding: 9px 18px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 300;
   background:none;
   text-decoration: none;
   transition-duration: .5s;
 }
-.menu__button:hover {
-  background-color: #CFD8DC;
-}
+
 
 @media (min-width: 601px) {
   .menu__box {

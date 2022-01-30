@@ -10,7 +10,6 @@ export default class Node extends Component {
             col,
             isStart,
             isEnd,
-            isVisited,
             isWall,
             onMouseDown,
             onMouseEnter,
