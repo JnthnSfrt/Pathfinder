@@ -242,7 +242,6 @@ export default function Pathfinder(props) {
 
 }
 
-
 const createNode = (col, row) => {
   return {
     col: col,
@@ -257,10 +256,13 @@ const createNode = (col, row) => {
 };
 
 const getInitialGrid = () => {
-  const factorHeight = (window.innerHeight / 977);
-  const factorWidth = (window.innerWidth / 1845);
-  const rows = Math.floor(factorHeight * FULLSCREEN_GRID_ROWS);
-  const cols = Math.floor(factorWidth * FULLSCREEN_GRID_COLS);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
+  const nodeDimension = 26;
+
+
+  const rows = (height - 200) / nodeDimension;
+  const cols = (width - 64) / nodeDimension;
   const grid = [];
   for (let row = 0; row < rows; row++) {
     const currentRow = [];
