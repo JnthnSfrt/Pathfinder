@@ -4,6 +4,7 @@ import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
 import { primMaze } from '../algorithms/Maze/Prim.js';
 import Node from './Node/Node.jsx';
+import '../Styles/Sidebar.css'
 
 import '../Styles/Pathfinder.css';
 
@@ -54,6 +55,7 @@ export default class Pathfinder extends Component {
   handleMouseUp(row, col) {
     if (this.state.mouseIsPressed) {
       this.setState({ mouseIsPressed: false, stateName: 'idle' });
+      this.openSidebar();
     }
   }
 
@@ -61,6 +63,7 @@ export default class Pathfinder extends Component {
   setStartNode() {
     if (this.state.stateName !== 'start') {
       this.setState({ stateName: 'start' });
+      this.closeSidebar();
     }
   }
 
@@ -68,6 +71,7 @@ export default class Pathfinder extends Component {
   setEndNode() {
     if (this.state.stateName !== 'end') {
       this.setState({ stateName: 'end' });
+      this.closeSidebar();
     }
   }
 
@@ -75,6 +79,7 @@ export default class Pathfinder extends Component {
   setWallNode() {
     if (this.state.stateName !== 'wall') {
       this.setState({ stateName: 'wall' });
+      this.closeSidebar();
     }
   }
 
@@ -82,11 +87,16 @@ export default class Pathfinder extends Component {
   reset() {
     // "cheap" way to reset the grid
     window.location.reload();
-    //  const grid = getInitialGrid();
-    //  this.setState({ grid });
+    this.closeSidebar();
   }
 
+  closeSidebar = () => {
+    document.getElementById("menu__toggle").checked = false;
+  }
 
+  openSidebar = () => {
+    document.getElementById("menu__toggle").checked = true;
+  }
 
   getStartNodes(grid) {
     const startNodes = [];
@@ -146,12 +156,14 @@ export default class Pathfinder extends Component {
 
     const visitedNodesInOrder = dijkstra(grid, startNode, endNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(endNode);
-    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder)
+    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    this.closeSidebar();
   }
 
   visualizeMaze() {
     const maze = primMaze(this.state.grid);
     this.animateMaze(maze);
+    this.closeSidebar();
   }
 
   animateMaze(maze) {
@@ -175,20 +187,29 @@ export default class Pathfinder extends Component {
     const { grid, mouseIsPressed } = this.state;
     return (
       <>
-        <div className="toolbar">
-          <button className="button" onClick=
-            {() => this.setStartNode()}>Set start node</button>
-          <button className="button" onClick=
-            {() => this.setEndNode()}>Set end node</button>
-          <button className="button" onClick=
-            {() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
-          <button className="button" onClick=
-            {() => this.setWallNode()}>Draw wall</button>
-          <button className="button" onClick=
-            {() => this.visualizeMaze()}>Visualize Maze</button>
-          <button className="button" onClick=
-            {() => this.reset()}>Reset</button>
+        {/* Sidebar */}
+        <div className="Sidebar">
+          <input id="menu__toggle" type="checkbox" />
+          <label class="menu__btn" for="menu__toggle">
+            <span></span>
+          </label>
+          <ul class="menu__box">
+            <button class="menu__item" onClick=
+              {() => this.setStartNode()}>Set start node</button>
+            <button class="menu__item" onClick=
+              {() => this.setEndNode()}>Set end node</button>
+            <button class="menu__item" onClick=
+              {() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
+            <button class="menu__item" onClick=
+              {() => this.setWallNode()}>Draw wall</button>
+            <button class="menu__item" onClick=
+              {() => this.visualizeMaze()}>Visualize Maze</button>
+            <button class="menu__item" onClick=
+              {() => this.reset()}>Reset</button>
+            Dimension: <span id="dimension">{window.innerWidth} * {window.innerHeight}</span>
+          </ul>
         </div>
+
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
