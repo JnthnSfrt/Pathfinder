@@ -21,6 +21,8 @@
 
 .content {
   padding-left: 30px;
+  display: table;
+  margin: auto auto;
 }
 
 
