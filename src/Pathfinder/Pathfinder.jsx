@@ -205,19 +205,19 @@ export default function Pathfinder(props) {
           <span></span>
         </label>
         <ul class="menu__box">
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => setStartNode()}>Set start node</button>
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => setEndNode()}>Set end node</button>
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => visualizeAlgorithm()}>Visualize Algorithm</button>
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => setWallNode()}>Draw wall</button>
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => visualizeMaze()}>Visualize Maze</button>
-          <button class="menu__item" onClick=
+          <button class="menu__button" onClick=
             {() => reset()}>Reset</button>
-          {/* Dimension: <span id="dimension">{window.innerWidth} * {window.innerHeight}</span> */}
+          <span id="dimension">{window.innerWidth} * {window.innerHeight}</span>
         </ul>
       </div>
 
