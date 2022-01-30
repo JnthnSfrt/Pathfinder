@@ -148,6 +148,14 @@ export default function Pathfinder(props) {
     const startNode = startNodes[0];
     const endNode = endNodes[0];
 
+    if (!startNode) {
+      window.alert("Start node is missing!");
+      return;
+    }
+    if (!endNode) {
+      window.alert("End node is missing!");
+      return;
+    }
     const visitedNodesInOrder = dijkstra(grid, startNode, endNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(endNode);
     animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
