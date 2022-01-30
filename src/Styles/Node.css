@@ -3,7 +3,7 @@
 .node {
     width: 25px;
     height: 25px;
-    margin-top: -4px;
+    margin-top: -1px;
     outline: 0.5px solid var(--main-wall);
     display: inline-block;
   }

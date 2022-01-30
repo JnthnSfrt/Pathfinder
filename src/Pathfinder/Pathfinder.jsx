@@ -1,94 +1,97 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
 import { primMaze } from '../algorithms/Maze/Prim.js';
 import Node from './Node/Node.jsx';
+import '../Styles/Sidebar.css'
 
 import '../Styles/Pathfinder.css';
 
-const FULLSCREEN_GRID_COLS = 66;
-const FULLSCREEN_GRID_ROWS = 29;
 const MULTIPLIER = 1.25;
 
-export default class Pathfinder extends Component {
-  constructor() {
-    super();
-    this.state = {
-      grid: [],
-      startNodes: [],
-      mouseIsPressed: false,
-      // Control the mouse behaviour 
-      stateName: 'idle',
-    };
-    // preserve the initial state in a new object
-    this.baseState = this.state;
-  }
+export default function Pathfinder(props) {
+  const [grid, setGrid] = useState(getInitialGrid());
+  const [isMousePressed, setIsMousePressed] = useState(false);
+  const [stateName, setStateName] = useState('idle');
 
-  componentDidMount() {
+
+  const componentDidMount = () => {
     const grid = getInitialGrid();
-    this.setState({ grid });
+    setGrid(grid);
   }
 
-  handleMouseDown(row, col) {
-    if (this.state.stateName === 'idle') return;
+  const handleMouseDown = (row, col) => {
+    if (stateName === 'idle') return;
     const newGrid =
-      getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
-    this.setState({ grid: newGrid, mouseIsPressed: true });
+      getGridWithNewNode(grid, row, col, stateName);
+    setGrid(newGrid);
+    setIsMousePressed(true);
     // After pressing the button to set walls hovering over the grid 
     // would start drawing walls. With an additional state walls are 
     // getting placed after a mouse click into a node.  
-    if (this.state.stateName === 'wall') {
-      this.setState({ stateName: 'draw-wall' })
+    if (stateName === 'wall') {
+      setStateName('draw-wall')
     }
   }
 
-  handleMouseEnter(row, col) {
-    if (this.state.stateName === 'draw-wall') {
+  const handleMouseEnter = (row, col) => {
+    if (stateName === 'draw-wall') {
       const newGrid =
-        getGridWithNewNode(this.state.grid, row, col, this.state.stateName);
-      this.setState({ grid: newGrid, mouseIsPressed: true });
+        getGridWithNewNode(grid, row, col, stateName);
+      setGrid(grid);
+      setIsMousePressed(true);
     }
   }
 
-  handleMouseUp(row, col) {
-    if (this.state.mouseIsPressed) {
-      this.setState({ mouseIsPressed: false, stateName: 'idle' });
+  const handleMouseUp = (row, col) => {
+    if (isMousePressed) {
+      setIsMousePressed(false);
+      setStateName('idle');
+      openSidebar();
     }
   }
 
   // Switch state to enable placing start node(s) with mouse click
-  setStartNode() {
-    if (this.state.stateName !== 'start') {
-      this.setState({ stateName: 'start' });
+  const setStartNode = () => {
+    if (stateName !== 'start') {
+      setStateName('start');
+      closeSidebar();
     }
   }
 
   // Switch state to enable placing end node(s) with mouse click
-  setEndNode() {
-    if (this.state.stateName !== 'end') {
-      this.setState({ stateName: 'end' });
+  const setEndNode = () => {
+    if (stateName !== 'end') {
+      setStateName('end');
+      closeSidebar();
     }
   }
 
   // Switch state to enable placing wall node(s) with mouse click
-  setWallNode() {
-    if (this.state.stateName !== 'wall') {
-      this.setState({ stateName: 'wall' });
+  const setWallNode = () => {
+    if (stateName !== 'wall') {
+      setStateName('wall');
+      closeSidebar();
     }
   }
 
   // Removes all start, end and wall nodes
-  reset() {
+  const reset = () => {
     // "cheap" way to reset the grid
     window.location.reload();
-    //  const grid = getInitialGrid();
-    //  this.setState({ grid });
+    closeSidebar();
   }
 
+  const closeSidebar = () => {
+    document.getElementById("menu__toggle").checked = false;
+  }
 
+  const openSidebar = () => {
+    document.getElementById("menu__toggle").checked = true;
+  }
 
-  getStartNodes(grid) {
+  const getStartNodes = (grid) => {
     const startNodes = [];
     for (const row of grid) {
       for (const node of row) {
@@ -98,7 +101,7 @@ export default class Pathfinder extends Component {
     return startNodes;
   }
 
-  getEndNodes(grid) {
+  const getEndNodes = (grid) => {
     const endNodes = [];
     for (const row of grid) {
       for (const node of row) {
@@ -109,23 +112,24 @@ export default class Pathfinder extends Component {
   }
 
 
-  animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 0; i <= visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length) {
+  const animateAlgorithm =
+    (visitedNodesInOrder, nodesInShortestPathOrder) => {
+      for (let i = 0; i <= visitedNodesInOrder.length; i++) {
+        if (i === visitedNodesInOrder.length) {
+          setTimeout(() => {
+            animateShortestPath(nodesInShortestPathOrder);
+          }, 10 * i);
+          return;
+        }
         setTimeout(() => {
-          this.animateShortestPath(nodesInShortestPathOrder);
+          const node = visitedNodesInOrder[i];
+          document.getElementById(`node-${node.row}-${node.col}`)
+            .className = 'node node-visited';
         }, 10 * i);
-        return;
       }
-      setTimeout(() => {
-        const node = visitedNodesInOrder[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
-      }, 10 * i);
     }
-  }
 
-  animateShortestPath(nodesInShortestPathOrder) {
+  const animateShortestPath = (nodesInShortestPathOrder) => {
     for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
       setTimeout(() => {
         const node = nodesInShortestPathOrder[i];
@@ -136,25 +140,34 @@ export default class Pathfinder extends Component {
   }
 
   //Only handles one start and one end node
-  visualizeAlgorithm() {
-    const { grid } = this.state;
-    const startNodes = this.getStartNodes(grid);
-    const endNodes = this.getEndNodes(grid);
+  const visualizeAlgorithm = () => {
+    const startNodes = getStartNodes(grid);
+    const endNodes = getEndNodes(grid);
 
     const startNode = startNodes[0];
     const endNode = endNodes[0];
 
+    if (!startNode) {
+      window.alert("Start node is missing!");
+      return;
+    }
+    if (!endNode) {
+      window.alert("End node is missing!");
+      return;
+    }
     const visitedNodesInOrder = dijkstra(grid, startNode, endNode);
     const nodesInShortestPathOrder = getNodesInShortestPathOrder(endNode);
-    this.animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder)
+    animateAlgorithm(visitedNodesInOrder, nodesInShortestPathOrder);
+    closeSidebar();
   }
 
-  visualizeMaze() {
-    const maze = primMaze(this.state.grid);
-    this.animateMaze(maze);
+  const visualizeMaze = () => {
+    const maze = primMaze(grid);
+    animateMaze(maze);
+    closeSidebar();
   }
 
-  animateMaze(maze) {
+  const animateMaze = (maze) => {
     for (let col = 0; col < maze[0].length; col++) {
       for (let row = 0; row < maze.length; row++) {
         setTimeout(() => {
@@ -168,59 +181,75 @@ export default class Pathfinder extends Component {
         }, MULTIPLIER * 305 * row);
       }
     }
-    setTimeout(() => this.setState({ grid: maze }), MULTIPLIER * 10000);
+    setTimeout(() => setGrid(maze), MULTIPLIER * 10000);
   }
 
-  render() {
-    const { grid, mouseIsPressed } = this.state;
-    return (
-      <>
-        <div className="toolbar">
-          <button className="button" onClick=
-            {() => this.setStartNode()}>Set start node</button>
-          <button className="button" onClick=
-            {() => this.setEndNode()}>Set end node</button>
-          <button className="button" onClick=
-            {() => this.visualizeAlgorithm()}>Visualize Algorithm</button>
-          <button className="button" onClick=
-            {() => this.setWallNode()}>Draw wall</button>
-          <button className="button" onClick=
-            {() => this.visualizeMaze()}>Visualize Maze</button>
-          <button className="button" onClick=
-            {() => this.reset()}>Reset</button>
-        </div>
-        <div className="grid">
-          {grid.map((row, rowIdx) => {
-            return (
-              <div key={rowIdx}>
-                {row.map((node, nodeIdx) => {
-                  const { row, col, isEnd, isStart, isWall } = node;
-                  return (
-                    <Node
-                      key={nodeIdx}
-                      col={col}
-                      isEnd={isEnd}
-                      isStart={isStart}
-                      isWall={isWall}
-                      mouseIsPressed={mouseIsPressed}
-                      onMouseDown={(row, col) =>
-                        this.handleMouseDown(row, col)}
-                      onMouseEnter={(row, col) =>
-                        this.handleMouseEnter(row, col)}
-                      onMouseUp={(row, col) =>
-                        this.handleMouseUp(row, col)}
-                      row={row} />
-                  );
-                })}
-              </div>
-            );
-          })}
-        </div>
-      </>
-    );
-  }
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      reset();
+    }, 250)
+    window.addEventListener('resize', debouncedHandleResize)
+
+    //Clean-up listener
+    return _ => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  })
+
+  return (
+    <>
+      {/* Sidebar */}
+      <div className="Sidebar">
+        <input id="menu__toggle" type="checkbox" />
+        <label class="menu__btn" for="menu__toggle">
+          <span></span>
+        </label>
+        <ul class="menu__box">
+          <button class="menu__button" onClick=
+            {() => setStartNode()}>Set start node</button>
+          <button class="menu__button" onClick=
+            {() => setEndNode()}>Set end node</button>
+          <button class="menu__button" onClick=
+            {() => visualizeAlgorithm()}>Visualize Algorithm</button>
+          <button class="menu__button" onClick=
+            {() => setWallNode()}>Draw wall</button>
+          <button class="menu__button" onClick=
+            {() => visualizeMaze()}>Visualize Maze</button>
+          <button class="menu__button" onClick=
+            {() => reset()}>Reset</button>
+        </ul>
+      </div>
+
+      <div className="grid">
+        {grid.map((row, rowIdx) => {
+          return (
+            <div key={rowIdx}>
+              {row.map((node, nodeIdx) => {
+                const { row, col, isEnd, isStart, isWall } = node;
+                return (
+                  <Node
+                    key={nodeIdx}
+                    col={col}
+                    isEnd={isEnd}
+                    isStart={isStart}
+                    isWall={isWall}
+                    mouseIsPressed={isMousePressed}
+                    onMouseDown={(row, col) =>
+                      handleMouseDown(row, col)}
+                    onMouseEnter={(row, col) =>
+                      handleMouseEnter(row, col)}
+                    onMouseUp={(row, col) =>
+                      handleMouseUp(row, col)}
+                    row={row} />
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
+    </>
+  );
 }
-
 
 const createNode = (col, row) => {
   return {
@@ -236,10 +265,13 @@ const createNode = (col, row) => {
 };
 
 const getInitialGrid = () => {
-  const factorHeight = (window.innerHeight / 977);
-  const factorWidth = (window.innerWidth / 1845);
-  const rows = Math.floor(factorHeight * FULLSCREEN_GRID_ROWS);
-  const cols = Math.floor(factorWidth * FULLSCREEN_GRID_COLS);
+  const height = window.innerHeight;
+  const width = window.innerWidth;
+  const nodeDimension = 26;
+
+
+  const rows = (height - 200) / nodeDimension;
+  const cols = (width - 64) / nodeDimension;
   const grid = [];
   for (let row = 0; row < rows; row++) {
     const currentRow = [];
@@ -276,4 +308,17 @@ const getGridWithNewNode = (grid, row, col, stateName) => {
   }
   grid[row][col] = newNode;
   return grid;
+}
+
+//Reduces amount of resize events getting fired
+//time in milliseconds
+function debounce(fn, ms) {
+  let timer
+  return _ => {
+    clearTimeout(timer)
+    timer = setTimeout(_ => {
+      timer = null
+      fn.apply(this, arguments)
+    }, ms)
+  };
 }
