@@ -36,6 +36,7 @@
   position: absolute;
   width: 26px;
   height: 2px;
+  /* Color of Sidebar-Button*/
   background-color: black;
   transition-duration: .5s;
 }
@@ -56,26 +57,27 @@
   height: 100%;
   width: 100%;
   margin: 0;
-  padding: 80px 0;
+  padding: 93px 0;
   list-style: none;
-  background-color: white;
+  background-color: whitesmoke;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: 0.5s;
   z-index: 1;
 }
 /* Menü-Eintrag */
-.menu__item {
+.menu__button {
   display: block;
   min-width: 100%;
-  border-radius: 0px;
-  padding: 12px 24px;
-  color: #333;
+  margin-bottom: 10px;
+  border: 0.5px;
+  padding: 9px 18px;
   font-size: 16px;
   font-weight: 600;
+  background:none;
   text-decoration: none;
   transition-duration: .5s;
 }
-.menu__item:hover {
+.menu__button:hover {
   background-color: #CFD8DC;
 }
 
@@ -84,7 +86,8 @@
     width: 400px;
   }
 
-  .menu__item {
+  .menu__button {
     font-size: 20px;
+    padding: 12px 24px;
   }
 }

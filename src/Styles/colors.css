@@ -1,30 +1,15 @@
 :root {
-  --main-dark: rgb(0, 100, 140);
-  --main-bright: rgb(243, 251, 255);
-  --main-bright2: rgb(233, 241, 245);
-  --main-wall: rgb(1, 56, 78);
+  --main-dark: rgb(98, 114, 117);
+  --main-bright: rgb(223, 236, 238);
+  --main-bright2: rgb(181, 206, 209);
+  --main-wall: rgb(78, 78, 78);
   --main-start: rgb(121, 250, 139);
   --main-end: rgb(255, 188, 188);
-  --main-font: rgba(243, 251, 255, 0.875);
-  --main-shortestPath0: rgb(77, 22, 0);
-  --main-shortestPath50: rgb(197, 56, 0);
-  --main-shortestpath100: rgb(255, 200, 178);
-  --main-visited50: rgb(0, 130, 182, 0.75);
-  --main-visited75: rgba(0, 183, 255, 0.775);
-  --main-visited100: rgba(175, 228, 255, 0.75);  
-}
-
-[data-theme="dark"] {
-  --main-dark: #292929;
-  --main-bright: rgb(110, 110, 110);
-  --main-bright2:rgb(129, 129, 129);
-  --main-wall: rgb(32, 32, 32);
-  --main-start: rgb(26, 126, 39);
-  --main-end: rgb(163, 33, 33);
-  --main-shortestPath0: rgb(71, 20, 0);
-  --main-shortestPath50: rgb(122, 35, 0);
-  --main-shortestpath100: rgb(180, 120, 96);
-  --main-visited50: rgba(29, 29, 29, 0.75);
-  --main-visited75: rgba(46, 46, 46, 0.775);
-  --main-visited100: rgba(146, 146, 146, 0.75); 
+  --main-font: rgb(78, 78, 78);
+  --main-shortestPath0: rgb(0, 46, 77);
+  --main-shortestPath50: rgb(0, 135, 197);
+  --main-shortestpath100: rgb(178, 218, 255);
+  --main-visited50: rgba(126, 126, 126, 0.75);
+  --main-visited75: rgba(167, 167, 167, 0.775);
+  --main-visited100: rgba(204, 204, 204, 0.75);  
 }

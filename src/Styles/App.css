@@ -1,4 +1,4 @@
-@import url(variables.css);
+@import url(colors.css);
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@1,300&display=swap');
 
 * {
@@ -16,12 +16,12 @@
   margin-bottom: 22px;
   font-size: 26px;
   padding-left: 30px;
-
 }
 
 .content {
   display: table;
   margin: auto auto;
+
 }
 
 
