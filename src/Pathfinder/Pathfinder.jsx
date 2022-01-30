@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 
 import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
@@ -8,14 +8,13 @@ import '../Styles/Sidebar.css'
 
 import '../Styles/Pathfinder.css';
 
-const FULLSCREEN_GRID_COLS = 66;
-const FULLSCREEN_GRID_ROWS = 29;
 const MULTIPLIER = 1.25;
 
 export default function Pathfinder(props) {
   const [grid, setGrid] = useState(getInitialGrid());
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [stateName, setStateName] = useState('idle');
+
 
   const componentDidMount = () => {
     const grid = getInitialGrid();
@@ -185,6 +184,18 @@ export default function Pathfinder(props) {
     setTimeout(() => setGrid(maze), MULTIPLIER * 10000);
   }
 
+  useEffect(() => {
+    const debouncedHandleResize = debounce(function handleResize() {
+      reset();
+    }, 250)
+    window.addEventListener('resize', debouncedHandleResize)
+
+    //Clean-up listener
+    return _ => {
+      window.removeEventListener('resize', debouncedHandleResize)
+    }
+  })
+
   return (
     <>
       {/* Sidebar */}
@@ -206,7 +217,7 @@ export default function Pathfinder(props) {
             {() => visualizeMaze()}>Visualize Maze</button>
           <button class="menu__item" onClick=
             {() => reset()}>Reset</button>
-          Dimension: <span id="dimension">{window.innerWidth} * {window.innerHeight}</span>
+          {/* Dimension: <span id="dimension">{window.innerWidth} * {window.innerHeight}</span> */}
         </ul>
       </div>
 
@@ -239,7 +250,6 @@ export default function Pathfinder(props) {
       </div>
     </>
   );
-
 }
 
 const createNode = (col, row) => {
@@ -299,4 +309,17 @@ const getGridWithNewNode = (grid, row, col, stateName) => {
   }
   grid[row][col] = newNode;
   return grid;
+}
+
+//Reduces amount of resize events getting fired
+//time in milliseconds
+function debounce(fn, ms) {
+  let timer
+  return _ => {
+    clearTimeout(timer)
+    timer = setTimeout(_ => {
+      timer = null
+      fn.apply(this, arguments)
+    }, ms)
+  };
 }
