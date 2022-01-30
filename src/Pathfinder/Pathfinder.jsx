@@ -33,7 +33,7 @@ export default function Pathfinder(props) {
     if (stateName === 'draw-wall') {
       const newGrid =
         getGridWithNewNode(grid, row, col, stateName);
-      setGrid(grid);
+      setGrid(newGrid);
       setIsMousePressed(true);
     }
   }
