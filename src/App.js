@@ -15,7 +15,7 @@ function App() {
       <div className="footer">
         <a className="github-link" href="https://github.com/JonathanSeifert/Pathfinder"
           title="Quellcode zur Applikation"
-          target="_blank">github.com/JonathanSeifert/Pathfinder</a>
+          target="_blank" rel="noreferrer">github.com/JonathanSeifert/Pathfinder</a>
       </div>
     </body>
   );

@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { dijkstra, getNodesInShortestPathOrder }
   from '../algorithms/Dijkstra.js';
@@ -14,12 +14,6 @@ export default function Pathfinder(props) {
   const [grid, setGrid] = useState(getInitialGrid());
   const [isMousePressed, setIsMousePressed] = useState(false);
   const [stateName, setStateName] = useState('idle');
-
-
-  const componentDidMount = () => {
-    const grid = getInitialGrid();
-    setGrid(grid);
-  }
 
   const handleMouseDown = (row, col) => {
     if (stateName === 'idle') return;
@@ -285,28 +279,28 @@ const getInitialGrid = () => {
 
 const getGridWithNewNode = (grid, row, col, stateName) => {
   const newGrid = getInitialGrid();
-  const node = newGrid[row][col];
+  let node = newGrid[row][col];
   switch (stateName) {
     case "start":
-      var newNode = {
+      node = {
         ...node,
         isStart: true
       };
       break;
     case "end":
-      var newNode = {
+      node = {
         ...node,
         isEnd: true
       };
       break;
     default:
-      var newNode = {
+      node = {
         ...node,
         isWall: true
       }
       break;
   }
-  grid[row][col] = newNode;
+  grid[row][col] = node;
   return grid;
 }
 
